@@ -1,0 +1,37 @@
+class Tree:
+    """
+    A bare-bones Tree ADT that identifies the root with the entire tree.
+    """
+
+    def __init__(self, value=None, children=None):
+        """
+        Create Tree self with content value and 0 or more children
+        @param Tree self: this tree
+        @param object value: value contained in this tree
+        @param list[Tree] children: possibly-empty list of children
+        @rtype: None
+        """
+        self.value = value
+        # copy children if not None
+        self.children = children.copy() if children else []
+
+    def __contains__(self, v):
+        """
+        Return whether Tree self contains v.
+        @param Tree self: this tree
+        @param object v: value to search this tree for
+        >>> t = Tree(17)
+        >>> t.__contains__(17)
+        True
+        >>> t = descendants_from_list(Tree(19), [1, 2, 3, 4, 5, 6, 7], 3)
+        >>> t.__contains__(5)
+        True
+        >>> t.__contains__(18)
+        False
+        """
+        if not self.children:
+            return self.value == v
+        else:
+            return ((self.value == v) or
+                    (any([v in n for n in self.chldren])))
+
